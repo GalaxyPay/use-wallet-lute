@@ -1,4 +1,4 @@
-# use-wallet-lute
+# @galaxypay/use-wallet-lute
 
 [![npm version](https://img.shields.io/npm/v/@galaxypay/use-wallet-lute)](https://www.npmjs.com/package/@galaxypay/use-wallet-lute)
 [![License](https://img.shields.io/github/license/GalaxyPay/use-wallet-lute)](https://github.com/GalaxyPay/use-wallet-lute/blob/main/LICENSE)
