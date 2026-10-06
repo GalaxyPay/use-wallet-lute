@@ -9,15 +9,15 @@ importers:
   .:
     dependencies:
       '@galaxypay/lute-connect':
-        specifier: 3.0.1
-        version: 3.0.1
-      '@txnlab/use-wallet':
-        specifier: ^5.0.0
-        version: 5.0.0(algosdk@3.7.0)
+        specifier: 3.1.0
+        version: 3.1.0
     devDependencies:
       '@eslint/js':
         specifier: ^10.0.1
         version: 10.0.1(eslint@10.9.0)
+      '@txnlab/use-wallet':
+        specifier: ^5.1.0-next.1
+        version: 5.1.0-next.1(algosdk@3.7.0)
       algosdk:
         specifier: 3.7.0
         version: 3.7.0
@@ -300,8 +300,8 @@ packages:
       '@noble/hashes':
         optional: true
 
-  '@galaxypay/lute-connect@3.0.1':
-    resolution: {integrity: sha512-a65433V13EQIV0eHpCcgFbOgs4Tp+zsRDhMFn5it0oTi1XfG2ld/SsRr0n0aLWTnaXNyOWQ7931bbd41a4Vo9w==}
+  '@galaxypay/lute-connect@3.1.0':
+    resolution: {integrity: sha512-P+zOi3QRJZ68xb912PbH/7E095RmLZ0VsVjSPjbxCefhAu3Mw9FnOhqbVzwVnnhjqZMXEaXn4CaVMTWeAEVxLQ==}
 
   '@humanfs/core@0.19.2':
     resolution: {integrity: sha512-UhXNm+CFMWcbChXywFwkmhqjs3PRCmcSa/hfBgLIb7oQ5HNb1wS0icWsGtSAUNgefHeI+eBrA8I1fxmbHsGdvA==}
@@ -576,14 +576,14 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@tanstack/store@0.9.1':
-    resolution: {integrity: sha512-+qcNkOy0N1qSGsP7omVCW0SDrXtaDcycPqBDE726yryiA5eTDFpjBReaYjghVJwNf1pcPMyzIwTGlYjCSQR0Fg==}
+  '@tanstack/store@0.11.1':
+    resolution: {integrity: sha512-mzTOBhypOuDJAy/D8n2MfUZ1HFkXnmSETviRyhqEC8LUE7/IZQExOTxMANj3KjTofYTkFNpBY67qaVrT41YccA==}
 
-  '@txnlab/use-wallet@5.0.0':
-    resolution: {integrity: sha512-GHAD3Kwq7w/HbR3I/SUnzHXIW9qaBLxf7RvS52YEZfuTji5gppVarDly8TVpAzJwGisH51burywYP0qpad/nCw==}
+  '@txnlab/use-wallet@5.1.0-next.1':
+    resolution: {integrity: sha512-spu3aqeKqEtQuKXytsDRjz7uc++1v6SQsUtL2i8wNxsJulTj7oa7m7kwsyDcj/FUkePwpL4KBBrGb/3w80QKeg==}
     engines: {node: '>=22'}
     peerDependencies:
-      algosdk: ^3.0.0
+      algosdk: ^3.7.0
 
   '@types/chai@5.2.3':
     resolution: {integrity: sha512-Mw558oeA9fFbv65/y4mHtXDs9bPnFMZAL/jxdPFUpOHHIXX91mcgEHbS5Lahr+pwZFR8A7GQleRWeI6cGFC2UA==}
@@ -1701,7 +1701,7 @@ snapshots:
 
   '@exodus/bytes@1.15.1': {}
 
-  '@galaxypay/lute-connect@3.0.1': {}
+  '@galaxypay/lute-connect@3.1.0': {}
 
   '@humanfs/core@0.19.2':
     dependencies:
@@ -1852,11 +1852,11 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.62.5':
     optional: true
 
-  '@tanstack/store@0.9.1': {}
+  '@tanstack/store@0.11.1': {}
 
-  '@txnlab/use-wallet@5.0.0(algosdk@3.7.0)':
+  '@txnlab/use-wallet@5.1.0-next.1(algosdk@3.7.0)':
     dependencies:
-      '@tanstack/store': 0.9.1
+      '@tanstack/store': 0.11.1
       algosdk: 3.7.0
       tweetnacl: 1.0.3
 

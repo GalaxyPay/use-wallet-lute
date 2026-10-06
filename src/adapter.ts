@@ -78,16 +78,21 @@ export class LuteAdapter extends BaseWallet<LuteConnectOptions> {
     this.logger.info('Connecting...')
     const client = this.client || (await this.initializeClient())
     const genesisId = await this.getGenesisId()
-    const accounts = await client.connect(genesisId)
+
+    // Also returns how each account signs, so the manager can simulate fees
+    // with correctly shaped signatures.
+    const { addrs: accounts, emptySignatures } = await client.connectAccounts(genesisId)
 
     if (accounts.length === 0) {
       this.logger.error('No accounts found!')
       throw new Error('No accounts found!')
     }
 
-    const walletAccounts = accounts.map((address: string, idx: number) => ({
+    // An account without an empty signature is of unknown type to the manager.
+    const walletAccounts: WalletAccount[] = accounts.map((address: string, idx: number) => ({
       name: `${this.metadata.name} Account ${idx + 1}`,
-      address
+      address,
+      emptySignature: emptySignatures[address]
     }))
 
     const activeAccount = walletAccounts[0]

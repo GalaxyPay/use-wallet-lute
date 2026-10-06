@@ -1,2 +1,4 @@
 allowBuilds:
   esbuild: true
+minimumReleaseAgeExclude:
+  - '@galaxypay/lute-connect@3.1.0'

@@ -15,7 +15,7 @@ vi.mock('@txnlab/use-wallet/adapter', async (importOriginal) => {
 })
 
 interface MockLuteConnect {
-  connect: Mock
+  connectAccounts: Mock
   signTxns: Mock
   signData: Mock
   siteName: string
@@ -24,6 +24,11 @@ interface MockLuteConnect {
 }
 
 let mockLuteConnect: MockLuteConnect
+
+/** A connectAccounts result for these addresses, with no empty signatures. */
+function connected(...addrs: string[]) {
+  return { addrs, emptySignatures: {} }
+}
 
 vi.mock('lute-connect', () => {
   return {
@@ -73,7 +78,7 @@ describe('LuteAdapter', () => {
     vi.clearAllMocks()
 
     mockLuteConnect = {
-      connect: vi.fn(),
+      connectAccounts: vi.fn(),
       signTxns: vi.fn(),
       signData: vi.fn(),
       siteName: 'Mock Site',
@@ -100,11 +105,13 @@ describe('LuteAdapter', () => {
 
   describe('connect', () => {
     it('should initialize client, return accounts, and update store', async () => {
-      mockLuteConnect.connect.mockResolvedValueOnce([account1.address, account2.address])
+      mockLuteConnect.connectAccounts.mockResolvedValueOnce(
+        connected(account1.address, account2.address)
+      )
 
       const accounts = await wallet.connect()
 
-      expect(mockLuteConnect.connect).toHaveBeenCalled()
+      expect(mockLuteConnect.connectAccounts).toHaveBeenCalled()
       expect(wallet.isConnected).toBe(true)
       expect(accounts).toEqual([account1, account2])
       expect(store.state.wallets[WALLET_ID]).toEqual({
@@ -113,8 +120,22 @@ describe('LuteAdapter', () => {
       })
     })
 
+    it('should attach empty signatures when Lute provides them', async () => {
+      mockLuteConnect.connectAccounts.mockResolvedValueOnce({
+        addrs: [account1.address, account2.address],
+        emptySignatures: { [account1.address]: 'gA==' }
+      })
+
+      const accounts = await wallet.connect()
+
+      expect(mockLuteConnect.connectAccounts).toHaveBeenCalledWith(expect.any(String))
+      // account2 has no empty signature: its type is unknown
+      expect(accounts).toEqual([{ ...account1, emptySignature: 'gA==' }, account2])
+      expect(store.state.wallets[WALLET_ID]?.accounts).toEqual(accounts)
+    })
+
     it('should throw an error if connection fails', async () => {
-      mockLuteConnect.connect.mockRejectedValueOnce(new Error('Auth error'))
+      mockLuteConnect.connectAccounts.mockRejectedValueOnce(new Error('Auth error'))
 
       await expect(wallet.connect()).rejects.toThrow('Auth error')
       expect(store.state.wallets[WALLET_ID]).toBeUndefined()
@@ -122,7 +143,7 @@ describe('LuteAdapter', () => {
     })
 
     it('should throw an error if an empty array is returned', async () => {
-      mockLuteConnect.connect.mockResolvedValueOnce([])
+      mockLuteConnect.connectAccounts.mockResolvedValueOnce(connected())
 
       await expect(wallet.connect()).rejects.toThrow('No accounts found!')
       expect(store.state.wallets[WALLET_ID]).toBeUndefined()
@@ -132,7 +153,7 @@ describe('LuteAdapter', () => {
 
   describe('disconnect', () => {
     it('should disconnect client and remove wallet from store', async () => {
-      mockLuteConnect.connect.mockResolvedValueOnce([account1.address])
+      mockLuteConnect.connectAccounts.mockResolvedValueOnce(connected(account1.address))
 
       await wallet.connect()
       await wallet.disconnect()
@@ -198,7 +219,9 @@ describe('LuteAdapter', () => {
     const txn4 = makePayTxn({ amount: 4000 })
 
     beforeEach(async () => {
-      mockLuteConnect.connect.mockResolvedValueOnce([connectedAcct1, connectedAcct2])
+      mockLuteConnect.connectAccounts.mockResolvedValueOnce(
+        connected(connectedAcct1, connectedAcct2)
+      )
 
       await wallet.connect()
     })
@@ -382,7 +405,7 @@ describe('LuteAdapter', () => {
     beforeEach(async () => {
       vi.stubGlobal('location', { host: testDomain })
 
-      mockLuteConnect.connect.mockResolvedValueOnce([connectedAcct1])
+      mockLuteConnect.connectAccounts.mockResolvedValueOnce(connected(connectedAcct1))
 
       await wallet.connect()
     })
