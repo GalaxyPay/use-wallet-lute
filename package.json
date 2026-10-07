@@ -1,6 +1,6 @@
 {
   "name": "@galaxypay/use-wallet-lute",
-  "version": "1.1.0-next.0",
+  "version": "1.1.0-next.1",
   "publishConfig": {
     "access": "public"
   },
@@ -32,19 +32,19 @@
     "algosdk": "^3.0.0"
   },
   "dependencies": {
-    "@galaxypay/lute-connect": "3.1.0"
+    "@galaxypay/lute-connect": "3.2.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@txnlab/use-wallet": "^5.1.0-next.1",
     "algosdk": "3.7.0",
-    "eslint": "^10.9.0",
+    "eslint": "^10.12.0",
     "eslint-config-prettier": "^10.1.8",
-    "jsdom": "^30.0.1",
+    "jsdom": "^30.1.2",
     "prettier": "3.8.1",
     "tsdown": "0.22.14",
     "typescript": "5.9.3",
-    "typescript-eslint": "^8.33.1",
+    "typescript-eslint": "^8.71.1",
     "vitest": "3.2.4"
   },
   "scripts": {
