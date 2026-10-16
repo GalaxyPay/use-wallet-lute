@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@galaxypay/lute-connect':
-        specifier: 3.2.0
-        version: 3.2.0
+        specifier: 3.3.1
+        version: 3.3.1
     devDependencies:
       '@eslint/js':
         specifier: ^10.0.1
@@ -306,8 +306,8 @@ packages:
       '@noble/hashes':
         optional: true
 
-  '@galaxypay/lute-connect@3.2.0':
-    resolution: {integrity: sha512-SngqBxnlKKs5soVL6IJfKMAAHZWr/6ok7dkMH4r3AIuN3NKMNOsUoFtMQmyEZ/RGht+3jZfhKD7/Ckr8kOLkiQ==}
+  '@galaxypay/lute-connect@3.3.1':
+    resolution: {integrity: sha512-tx+qNdm+Rx1vUih6OB8hv3D82IUlLqbXCx0ee4ujzJ3pNUMaxduU3iivG3GZjeCDzGb1XuxP54vCf51ajR5gVQ==}
 
   '@humanfs/core@0.19.2':
     resolution: {integrity: sha512-UhXNm+CFMWcbChXywFwkmhqjs3PRCmcSa/hfBgLIb7oQ5HNb1wS0icWsGtSAUNgefHeI+eBrA8I1fxmbHsGdvA==}
@@ -1757,7 +1757,7 @@ snapshots:
 
   '@exodus/bytes@1.16.0': {}
 
-  '@galaxypay/lute-connect@3.2.0': {}
+  '@galaxypay/lute-connect@3.3.1': {}
 
   '@humanfs/core@0.19.2':
     dependencies:
